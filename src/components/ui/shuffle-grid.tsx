@@ -1,3 +1,4 @@
+'use client'
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -38,8 +39,8 @@ const shuffle = (array: (typeof squareData)[number][]) => {
   return arr;
 };
 
-const generateSquares = () =>
-  shuffle(squareData).map((sq) => (
+const generateSquares = (isInitial = false) =>
+  (isInitial ? squareData : shuffle(squareData)).map((sq) => (
     <motion.div
       key={sq.id}
       layout
@@ -56,10 +57,10 @@ const generateSquares = () =>
 /* ── Animated shuffle grid ── */
 const ShuffleGrid = () => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [squares, setSquares] = useState(generateSquares);
+  const [squares, setSquares] = useState(() => generateSquares(true));
 
   const shuffleSquares = () => {
-    setSquares(generateSquares());
+    setSquares(generateSquares(false));
     timeoutRef.current = setTimeout(shuffleSquares, 3000);
   };
 

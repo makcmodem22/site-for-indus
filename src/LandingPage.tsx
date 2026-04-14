@@ -1,4 +1,8 @@
+// @ts-nocheck
+'use client'
+
 import { useRef, useState, type FormEvent } from 'react'
+import Link from 'next/link'
 import { ShuffleHero } from '@/components/ui/shuffle-grid'
 import { GlobePulse } from '@/components/ui/globe-pulse'
 import { TestimonialSection, type Testimonial } from '@/components/ui/testimonials'

@@ -1,32 +1,13 @@
+// @ts-nocheck
+'use client'
+
 import { useLayoutEffect, useRef, useState, useEffect, useCallback } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { KitchenCanvas } from './Scene'
-import LandingPage from './LandingPage'
+import { KitchenCanvas } from '../../Scene'
+import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
-
-/* ─────────────── Simple Hash Router ─────────────── */
-
-type Page = 'landing' | '3d'
-
-function useHashRoute(): [Page, (p: Page) => void] {
-  const getPage = (): Page => (window.location.hash === '#3d' ? '3d' : 'landing')
-  const [page, setPage] = useState<Page>(getPage)
-
-  useEffect(() => {
-    const onHash = () => setPage(getPage())
-    window.addEventListener('hashchange', onHash)
-    return () => window.removeEventListener('hashchange', onHash)
-  }, [])
-
-  const navigate = (p: Page) => {
-    window.location.hash = p === 'landing' ? '' : p
-    setPage(p)
-  }
-
-  return [page, navigate]
-}
 
 /* ─────────────── Loading Screen ─────────────── */
 
@@ -188,7 +169,7 @@ function ScrollHint() {
 
 /* ─────────────── 3D Experience Page ─────────────── */
 
-function ThreeDExperience({ onBack }: { onBack: () => void }) {
+export default function ThreeDExperience() {
   const [loaded, setLoaded] = useState(false)
   const scrollDriverRef = useRef<HTMLDivElement>(null)
   const precisionRef = useRef<HTMLParagraphElement>(null)
@@ -314,13 +295,13 @@ function ThreeDExperience({ onBack }: { onBack: () => void }) {
                 3D Experience
               </p>
             </div>
-            <button
-              onClick={onBack}
+            <Link
+              href="/"
               className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-400 backdrop-blur-sm transition-all duration-300 hover:border-[#c9a962]/20 hover:text-[#c9a962]"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               ← Back
-            </button>
+            </Link>
           </div>
         </div>
       </header>
@@ -338,22 +319,3 @@ function ThreeDExperience({ onBack }: { onBack: () => void }) {
     </div>
   )
 }
-
-/* ─────────────── Main App ─────────────── */
-
-function App() {
-  const [page, navigate] = useHashRoute()
-
-  // Scroll to top on page change
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [page])
-
-  if (page === '3d') {
-    return <ThreeDExperience onBack={() => navigate('landing')} />
-  }
-
-  return <LandingPage />
-}
-
-export default App

@@ -1,3 +1,5 @@
+'use client'
+
 import { Suspense, useLayoutEffect, useRef, useMemo, type RefObject } from 'react'
 import { Canvas, useThree, useFrame } from '@react-three/fiber'
 import { Box, ContactShadows, Environment, MeshReflectorMaterial } from '@react-three/drei'
