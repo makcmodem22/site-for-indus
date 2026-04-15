@@ -436,25 +436,60 @@ function WhyUsSection() {
 
 const materials = [
   {
-    name: 'Granite',
-    tagline: 'Timeless & Durable',
-    description: 'The natural choice for hardworking kitchens. Each slab is unique, offering unmatched strength and character that lasts a lifetime.',
-    image: '/images/granite.png',
+    name: 'Marble',
+    slug: 'marble',
+    tagline: 'Trusty & Reliable',
+    description: 'Our Marble tiles are used for bathrooms, flooring and future walls which are all top-of-the-line, so performance is guaranteed.',
+    image: 'https://static.wixstatic.com/media/9b8796dfbbf8470889603b49c34f5953.jpg',
+    accent: '#d4c09a',
+  },
+  {
+    name: 'Granite Kitchen Worktop',
+    slug: 'granite',
+    tagline: 'Natural Harmony',
+    description: 'Our Granite worktops are all top-of-the-line, so performance is guaranteed. Granite is a material formed by the process of crystallization of Magma.',
+    image: 'https://static.wixstatic.com/media/68c3548bf3a2466fae201518cec1af9c.jpg',
     accent: '#6b7280',
   },
   {
-    name: 'Quartz',
-    tagline: 'Modern & Versatile',
-    description: 'Engineered for perfection — non-porous, stain-resistant, and available in a stunning range of contemporary colours and patterns.',
-    image: '/images/quartz.png',
+    name: 'Quartz Kitchen Worktop',
+    slug: 'quartz',
+    tagline: 'Manmade Power',
+    description: 'Our Quartz Worktops are all top-of-the-line, so performance is guaranteed. Quartz Worktops is a engineered product which is formed by 93% crushed quartz.',
+    image: 'https://static.wixstatic.com/media/b4980652fc3b4120bb2e2ea80d0cfe22.jpg',
     accent: '#9ca3af',
   },
   {
-    name: 'Marble',
-    tagline: 'Luxury & Elegance',
-    description: "The pinnacle of sophistication. Marble's dramatic veining and luminous finish elevate any space into a statement of refined taste.",
-    image: '/images/marble.png',
-    accent: '#d4c09a',
+    name: 'Interior Porcelain Tiles',
+    slug: 'interior-porcelain-tiles',
+    tagline: 'Subtle Excellence',
+    description: 'Explore our wide range of interior porcelain tiles built for durability and subtle excellence in any room.',
+    image: 'https://static.wixstatic.com/media/b6022e61cb0449abaf9b477261adc218.jpg',
+    accent: '#cbd5e1',
+  },
+  {
+    name: 'Exterior Porcelain Tiles',
+    slug: 'exterior-porcelain-tiles',
+    tagline: 'Precise Performance',
+    description: 'Top-of-the-line exterior porcelain tiles designed to withstand the elements and maintain precise performance outdoors.',
+    image: 'https://static.wixstatic.com/media/0565deed883142249fb9709721706fe3.jpg',
+    accent: '#94a3b8',
+  },
+  {
+    name: 'Sandstone Tiles',
+    slug: 'sandstone',
+    tagline: 'Unsettled Warmth',
+    description: 'Our Sandstone tiles are all top-of-the-line, which are used for outdoor flooring. Formed mainly of sand-sized mineral particles.',
+    image: 'https://static.wixstatic.com/media/51b81c6aa3e846d9bbba6a04a4652373.jpg',
+    accent: '#d6d3d1',
+  },
+  {
+    name: 'Porcelain Slabs',
+    slug: 'porcelain-slabs',
+    tagline: 'Exotic Touch',
+    description: 'Achieve an exotic touch with our expansive porcelain slabs, perfect for large-scale sophisticated installations.',
+    image: 'https://static.wixstatic.com/media/afc06a3cdd7f48eb8277be4d9094db2b.jpg',
+    accent: '#e2e8f0',
   },
 ]
 
@@ -492,7 +527,9 @@ function MaterialsSection() {
               initial="hidden"
               animate={isInView ? 'visible' : 'hidden'}
               custom={0.15 + i * 0.12}
-              className="group relative overflow-hidden rounded-2xl border border-white/[0.05] bg-[#111111] transition-all duration-500 hover:border-[#c9a962]/15"
+              className={`group relative overflow-hidden rounded-2xl border border-white/[0.05] bg-[#111111] transition-all duration-500 hover:border-[#c9a962]/15 ${
+                i === materials.length - 1 && materials.length % 3 === 1 ? 'md:col-start-2' : ''
+              }`}
             >
               {/* Image */}
               <div className="relative aspect-[4/3] overflow-hidden">
@@ -522,14 +559,14 @@ function MaterialsSection() {
                 <p className="mt-3 text-sm leading-relaxed text-neutral-500" style={{ fontFamily: "'Inter', sans-serif" }}>
                   {mat.description}
                 </p>
-                <a
-                  href="#contact"
+                <Link
+                  href={`/products/${mat.slug}`}
                   className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-medium text-[#c9a962] transition-all duration-300 hover:gap-2.5"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   Learn More
                   <ArrowRight size={14} />
-                </a>
+                </Link>
               </div>
             </motion.div>
           ))}
